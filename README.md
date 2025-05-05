@@ -4,7 +4,7 @@ Nestory is a family tree management system built with FastAPI and PostgreSQL on 
 
 ## Project Structure
 
-```json
+```js
 /*
 nestory_api/
 │
