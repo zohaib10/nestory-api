@@ -1,7 +1,10 @@
+
 from pydantic import BaseModel
-from typing import Optional
 
 class Person(BaseModel):
-    id: int
-    name: str
-    relationship: Optional[str] = None
+    id: str
+    full_name: str
+    birth_date: str
+    gender: str
+    tree_id: str
+    photo_url: str | None = None
