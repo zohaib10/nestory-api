@@ -9,25 +9,25 @@ Nestory is a family tree management system built with FastAPI and PostgreSQL on 
 nestory_api/
 │
 ├── app/
-│ ├── **init**.py
+│ ├── __init__.py
 │ ├── main.py # Entry point for FastAPI app
 │ ├── models/ # SQLAlchemy or Pydantic models
-│ │ ├── **init**.py
+│ │ ├── __init__.py
 │ │ └── person.py
 │ ├── schemas/ # Pydantic request/response schemas
-│ │ ├── **init**.py
+│ │ ├── __init__.py
 │ │ └── person.py
 │ ├── crud/ # Database interaction logic
-│ │ ├── **init**.py
+│ │ ├── __init__.py
 │ │ └── person.py
 │ ├── api/ # API route handlers
-│ │ ├── **init**.py
+│ │ ├── __init__.py
 │ │ └── person.py
 │ ├── db/ # Database config and session
-│ │ ├── **init**.py
+│ │ ├── __init__.py
 │ │ └── database.py
 │ └── core/ # Settings, config, and utilities
-│ ├── **init**.py
+│ ├── __init__.py
 │ └── config.py
 │
 ├── .env # Environment variables
