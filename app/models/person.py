@@ -6,7 +6,8 @@ class Person(Base):
     __tablename__ = "persons"
 
     id = Column(Integer, primary_key=True, index=True)
-    full_name = Column(String, index=True)
+    first_name = Column(String, index=True)
+    last_name = Column(String, index=True)
     birth_date = Column(Date)
     gender = Column(String)
     photo_url = Column(String, nullable=True)
