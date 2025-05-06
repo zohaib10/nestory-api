@@ -1,6 +1,8 @@
-from sqlalchemy import String, Integer, Column
-from sqlalchemy.orm  import relationship
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+
 from app.db.database import Base
+
 
 class Tree(Base):
     __tablename__ = "trees"

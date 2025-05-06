@@ -9,3 +9,11 @@ upgrade:
 
 downgrade:
 	alembic downgrade -1
+
+format:
+	black .
+	isort .
+	ruff format .
+
+lint:
+	ruff check . --fix

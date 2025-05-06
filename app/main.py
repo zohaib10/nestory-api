@@ -3,8 +3,6 @@ from fastapi import FastAPI
 
 from app.api import person, tree
 
-
-
 app = FastAPI(title="Nestory")
 
 app.include_router(person.router)

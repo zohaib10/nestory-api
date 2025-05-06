@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends
-from app.schemas.person import PersonCreate
 from sqlalchemy.orm import Session
-from app.db.database import get_db
+
 from app.crud import person as Person
+from app.db.database import get_db
+from app.schemas.person import PersonCreate
 
 router = APIRouter()
 
