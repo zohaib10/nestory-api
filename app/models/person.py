@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Date, ForeignKey
 from sqlalchemy.orm import relationship
 from app.db.database import Base
 
+
 class Person(Base):
     __tablename__ = "persons"
 
@@ -14,4 +15,3 @@ class Person(Base):
     tree_id = Column(Integer, ForeignKey("trees.id"), nullable=False)
 
     tree = relationship("Tree", back_populates="people")
-

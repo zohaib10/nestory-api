@@ -1,5 +1,5 @@
-
 from pydantic import BaseModel
+
 
 class Person(BaseModel):
     id: str
@@ -9,6 +9,7 @@ class Person(BaseModel):
     gender: str
     tree_id: str
     photo_url: str | None = None
+
 
 class PersonCreate(BaseModel):
     first_name: str
