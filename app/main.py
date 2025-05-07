@@ -2,8 +2,11 @@ import uvicorn
 from fastapi import FastAPI
 
 from app.api import person, tree
+from app.middlewares import add_exception_handlers
 
 app = FastAPI(title="Nestory")
+
+add_exception_handlers(app)
 
 app.include_router(person.router)
 app.include_router(tree.router)
