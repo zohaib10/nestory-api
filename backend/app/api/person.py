@@ -10,4 +10,5 @@ router = APIRouter()
 
 @router.post("/person")
 def create(person: PersonCreate, db: Session = Depends(get_db)):
+    print("Got request for Person")
     return Person.create_person(db, person)

@@ -19,20 +19,20 @@ lint:
 	ruff check . --fix
 
 start:
-	@echo "🚀 Starting Docker containers..."
+	@echo "🚀 Starting Nestory..."
 	docker-compose up -d
-	@echo "✅ Containers are up!"
-	@echo "🌐 Starting FastAPI server..."
-	uvicorn app.main:app --reload
 
 stop:
-	@echo "🛑 Stopping Docker containers..."
+	@echo "🛑 Stopping Nestory..."
 	docker-compose down
 
 logs:
 	@echo "📜 Showing logs..."
 	docker-compose logs -f
 
-restart: stop start
+restart:
+	@echo "🔄 Restarting Docker containers..."
+	docker-compose down
+	docker-compose up -d --build
 
 .PHONY: migrate upgrade downgrade format lint start stop logs restart

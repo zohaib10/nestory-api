@@ -1,17 +1,39 @@
 version: "3.9"
 services:
+  frontend:
+    container_name: nestory
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+
+  backend:
+    container_name: nestory-api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+    command:
+      [
+        "sh",
+        "-c",
+        "sleep 5 && alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload",
+      ]
+
   db:
+    container_name: nestory-db
     image: postgres:15
-    container_name: nestory_db
-    restart: always
     environment:
       POSTGRES_USER: nestory_user
       POSTGRES_PASSWORD: secret123
       POSTGRES_DB: nestory
     ports:
       - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
-volumes:
-  pgdata:
