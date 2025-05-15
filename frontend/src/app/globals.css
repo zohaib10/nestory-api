@@ -1,13 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: garden;
+  themes: lofi;
 }
 
 @plugin "daisyui/theme" {
-  name: "garden";
+  name: "lofi";
   default: true;
   --color-primary: "#3442D9";
-  --color-secondary: teal;
+  --color-secondary: "#fff";
 }
 
 [data-theme="light"] {
