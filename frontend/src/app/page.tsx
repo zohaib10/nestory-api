@@ -3,14 +3,16 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen px-10 py-10 font-[family-name:var(--font-geist-sans)]">
-      <div className="flex">
+    <div className="flex flex-col min-h-screen p-4 md:p-10 font-[family-name:var(--font-geist-sans)]">
+      <div className="md:flex">
         <div className="flex-1">
-          <p className="text-5xl mb-2 tracking-wide">
+          <p className="text-3xl md:text-5xl mb-2 tracking-wide">
             Every family has a story.
           </p>
-          <p className="text-5xl mb-2 tracking-wide">Start yours with</p>
-          <p className="text-5xl mb-2 tracking-wide">Nestory.</p>
+          <p className="text-3xl md:text-5xl mb-2 tracking-wide">
+            Start yours with
+          </p>
+          <p className="text-3xl md:text-5xl mb-2 tracking-wide">Nestory.</p>
           <p className="mb-0.5 font-light tracking-wide">
             Build beautiful, interactive family
           </p>
@@ -20,8 +22,8 @@ export default function Home() {
           <p className="mb-0.5 font-light tracking-wide">
             and share your heritage with ease.
           </p>
-          <div className="flex flex-col items-start m-6">
-            <button className="btn btn-primary btn-lg w-auto mb-4">
+          <div className="flex flex-col items-start mt-4 md:m-6">
+            <button className="btn btn-primary btn-lg w-auto mb-4 max-w-4xl">
               Get Started
             </button>
             <button className="btn btn-outline btn-lg w-auto mb-4">
@@ -39,7 +41,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="flex">
+      <div className="flex carousel rounded-box">
         <ValueProps
           image="/tree.png"
           title="Build Your Tree"
