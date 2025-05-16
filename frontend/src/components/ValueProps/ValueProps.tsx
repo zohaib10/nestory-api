@@ -15,7 +15,7 @@ export const ValueProps = ({
   height,
   width,
 }: ValuePropsType) => (
-  <div className="flex flex-col justify-center items-center border text-center rounded-lg border-gray-200 m-2 p-10 min-w-[280px]">
+  <div className="flex flex-col justify-center items-center border text-center rounded-lg border-gray-200 m-2 p-10 min-w-[240px]">
     <Image src={image} alt={title} width={width} height={height} />
     <p>{title}</p>
     <p>{prop}</p>

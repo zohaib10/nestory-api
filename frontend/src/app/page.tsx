@@ -23,10 +23,10 @@ export default function Home() {
             and share your heritage with ease.
           </p>
           <div className="flex flex-col items-start mt-4 md:m-6">
-            <button className="btn btn-primary btn-lg w-auto mb-4 max-w-4xl">
+            <button className="btn btn-primary btn-md md:btn-lg w-auto mb-4 max-w-4xl">
               Get Started
             </button>
-            <button className="btn btn-outline btn-lg w-auto mb-4">
+            <button className="btn btn-outline btn-md md:btn-lg w-auto mb-4">
               Sample a Tree
             </button>
           </div>
