@@ -14,7 +14,9 @@ export const Header = () => {
           </a>
         </div>
         <div className="flex-none">
-          <button className="btn btn-primary">Get Started</button>
+          <button className="btn btn-primary btn-sm md:btn-md">
+            Get Started
+          </button>
         </div>
       </div>
     </header>
