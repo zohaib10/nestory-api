@@ -7,12 +7,6 @@ import Tree, { RawNodeDatum } from "react-d3-tree";
 import { useCenteredTree } from "@/hooks";
 import Image from "next/image";
 
-const containerStyles = {
-  width: "100vw",
-  height: "100vh",
-  background: "#eee",
-};
-
 const renderForeignObjectNode = ({
   nodeDatum,
   toggleNode,
