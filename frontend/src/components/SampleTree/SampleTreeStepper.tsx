@@ -103,7 +103,7 @@ export const SampleTreeStepper = () => {
             />
             <h2 className="text-2xl font-semibold">All set!</h2>
             <p className="text-lg text-gray-600">
-              You're ready to start building your tree.
+              {`You're ready to start building your tree.`}
             </p>
             <button
               onClick={handleSaveSampleTree}
