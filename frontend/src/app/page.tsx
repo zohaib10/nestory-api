@@ -1,9 +1,14 @@
+"use client";
+
 import { ValueProps } from "@/components";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
-    <div className="flex flex-col min-h-screen p-4 md:p-10 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col">
       <div className="md:flex">
         <div className="flex-1">
           <p className="text-3xl md:text-5xl mb-2 tracking-wide">
@@ -26,7 +31,13 @@ export default function Home() {
             <button className="btn btn-primary btn-md md:btn-lg w-auto mb-4 max-w-4xl">
               Get Started
             </button>
-            <button className="btn btn-outline btn-md md:btn-lg w-auto mb-4">
+            <button
+              onClick={() => {
+                console.log("button clicked");
+                router.push("/sample");
+              }}
+              className="btn btn-outline btn-md md:btn-lg w-auto mb-4"
+            >
               Sample a Tree
             </button>
           </div>
@@ -71,24 +82,6 @@ export default function Home() {
           height={120}
         />
       </div>
-      <footer className="mt-10 flex justify-between">
-        <div>
-          <a className="cursor-pointer link" href="/about">
-            About
-          </a>
-        </div>
-        <div className="w-60 flex justify-between">
-          <a className="cursor-pointer link" href="/privacy">
-            Privacy
-          </a>
-          <a className="cursor-pointer link" href="/policy">
-            Policy
-          </a>
-          <a className="cursor-pointer link" href="/contact">
-            Contact
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }

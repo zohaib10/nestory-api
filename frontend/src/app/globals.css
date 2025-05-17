@@ -6,7 +6,7 @@
 @plugin "daisyui/theme" {
   name: "lofi";
   default: true;
-  --color-primary: "#3442D9";
+  --color-primary: "#4CAF50";
   --color-secondary: "#fff";
 }
 

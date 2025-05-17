@@ -7,7 +7,7 @@ export const Header = () => {
         <div className="flex items-center">
           <a
             className="flex items-center font-medium text-xl cursor-pointer"
-            href="#"
+            href="/"
           >
             <Image src="/logo.png" alt="Nestory logo" width={48} height={48} />
             <p className="text-3xl">Nestory</p>

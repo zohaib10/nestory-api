@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 
-import { Header } from "@/components";
+import { Footer, Header } from "@/components";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -35,8 +35,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        {children}
+        <div className="min-h-screen flex flex-col">
+          <Header />
+
+          <main className="flex-grow p-4 md:p-10 font-[family-name:var(--font-geist-sans)]">
+            {children}
+          </main>
+
+          <Footer />
+        </div>
+
         <Analytics />
       </body>
     </html>
