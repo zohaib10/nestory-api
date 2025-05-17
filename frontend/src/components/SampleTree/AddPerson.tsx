@@ -81,7 +81,6 @@ export const AddPerson = ({
           <option value="">Select gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="other">Other</option>
         </select>
         {errors.gender && (
           <p className="text-error text-sm mt-1">{errors.gender.message}</p>

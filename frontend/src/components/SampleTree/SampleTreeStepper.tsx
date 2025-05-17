@@ -107,7 +107,7 @@ export const SampleTreeStepper = () => {
             </p>
             <button
               onClick={handleSaveSampleTree}
-              className="btn btn-primary w-full"
+              className="btn btn-primary w-full mt-6"
             >
               Finish
             </button>
