@@ -13,7 +13,12 @@ const renderForeignObjectNode = ({
   foreignObjectProps,
 }: any) => (
   <g>
-    <foreignObject {...foreignObjectProps}>
+    <foreignObject
+      x={foreignObjectProps.x}
+      y={foreignObjectProps.y}
+      width={foreignObjectProps.width}
+      height={foreignObjectProps.height}
+    >
       <div
         className={`flex bg-white shadow-md rounded-md h-24 border-t-4 ${
           nodeDatum.attributes?.gender === "male"
@@ -30,7 +35,7 @@ const renderForeignObjectNode = ({
           height={100}
           width={100}
         />
-        <div className="flex flex-1 flex-col justify-between relative">
+        <div className="flex flex-1 flex-col justify-between">
           <div className="flex justify-between flex-2">
             <div className="flex flex-col mt-2 ml-1">
               <p>{nodeDatum.name}</p>
@@ -40,13 +45,13 @@ const renderForeignObjectNode = ({
               <Image src="/edit.png" alt="more" height={10} width={30} />
             </button>
           </div>
-          <div className="relative flex flex-1 items-center">
-            {nodeDatum.children && nodeDatum.children.length > 0 && (
-              <button className="btn btn-circle absolute top-0 right-25 m-2 w-8 h-8 bg-white shadow-2xl">
-                <Image src="/down.png" alt="down" height={10} width={30} />
+          {nodeDatum.children?.length > 0 && (
+            <div className="flex justify-start px-[12px] pt-2">
+              <button className="btn btn-circle w-6 h-6 bg-white">
+                <Image src="/down.png" alt="down" height={10} width={20} />
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </foreignObject>
