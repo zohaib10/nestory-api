@@ -10,5 +10,5 @@ export const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
     }
   }, []);
 
-  return [translate, containerRef] as const;
+  return [translate, containerRef, setTranslate] as const;
 };

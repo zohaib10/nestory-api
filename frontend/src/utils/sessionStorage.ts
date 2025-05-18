@@ -1,15 +1,15 @@
 // utils/sessionStorage.ts
 
-const PERSON_KEY = "nestory_person";
+const PERSON_KEY = "nestory_tree_data";
 const TREE_KEY = "nestory_tree";
 
-export const setPerson = (person: any) => {
+export const setTreeData = (person: any) => {
   if (typeof window !== "undefined") {
     sessionStorage.setItem(PERSON_KEY, JSON.stringify(person));
   }
 };
 
-export const getPerson = (): any | null => {
+export const getTreeData = (): any | null => {
   if (typeof window !== "undefined") {
     const raw = sessionStorage.getItem(PERSON_KEY);
     return raw ? JSON.parse(raw) : null;

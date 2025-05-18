@@ -8,6 +8,7 @@ declare module "react-d3-tree" {
   }
 
   export interface TreeProps {
+    className: string;
     data: RawNodeDatum | RawNodeDatum[];
     translate?: { x: number; y: number };
     nodeSize?: { x: number; y: number };

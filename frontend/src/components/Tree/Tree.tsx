@@ -1,7 +1,7 @@
 // App.tsx (Functional version, no Material UI)
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tree, { RawNodeDatum } from "react-d3-tree";
 
 import { useCenteredTree } from "@/hooks";
@@ -32,14 +32,17 @@ const renderForeignObjectNode = ({
         />
         <div className="flex flex-1 flex-col justify-between relative">
           <div className="flex justify-between flex-2">
-            <p>{nodeDatum.name}</p>
+            <div className="flex flex-col mt-2 ml-1">
+              <p>{nodeDatum.name}</p>
+              <p>Age: {nodeDatum.attributes?.age}</p>
+            </div>
             <button className="btn btn-circle w-8 h-8 bg-white border-0">
               <Image src="/edit.png" alt="more" height={10} width={30} />
             </button>
           </div>
           <div className="relative flex flex-1 items-center">
             {nodeDatum.children && nodeDatum.children.length > 0 && (
-              <button className="btn btn-circle absolute top-3 right-25 m-2 w-8 h-8 bg-white shadow-2xl">
+              <button className="btn btn-circle absolute top-0 right-25 m-2 w-8 h-8 bg-white shadow-2xl">
                 <Image src="/down.png" alt="down" height={10} width={30} />
               </button>
             )}
@@ -52,10 +55,11 @@ const renderForeignObjectNode = ({
 
 type FamilyTreeProps = {
   treeData: RawNodeDatum | RawNodeDatum[];
+  treeName: string;
 };
 
-export default function FamilyTree({ treeData }: FamilyTreeProps) {
-  const [translate, containerRef] = useCenteredTree();
+export default function FamilyTree({ treeData, treeName }: FamilyTreeProps) {
+  const [translate, containerRef, setTranslate] = useCenteredTree();
   const nodeSize = { x: 250, y: 300 };
   const separation = { siblings: 2, nonSiblings: 2 };
   const [zoom, setZoom] = useState(0.5);
@@ -67,12 +71,28 @@ export default function FamilyTree({ treeData }: FamilyTreeProps) {
     x: -125,
   };
 
+  useEffect(() => {
+    const handleArrowKeys = (e: KeyboardEvent) => {
+      const step = 50;
+      if (e.key === "ArrowLeft") setTranslate((t) => ({ ...t, x: t.x + step }));
+      if (e.key === "ArrowRight")
+        setTranslate((t) => ({ ...t, x: t.x - step }));
+      if (e.key === "ArrowUp") setTranslate((t) => ({ ...t, y: t.y + step }));
+      if (e.key === "ArrowDown") setTranslate((t) => ({ ...t, y: t.y - step }));
+    };
+
+    window.addEventListener("keydown", handleArrowKeys);
+    return () => window.removeEventListener("keydown", handleArrowKeys);
+  }, []);
+
   return (
     <div
       ref={containerRef}
       className="w-full h-[700px] overflow-hidden bg-gray-200"
     >
+      <p className="text-xl">{treeName}</p>
       <Tree
+        className="transition-transform duration-300 ease-in-out"
         data={treeData}
         translate={translate}
         nodeSize={nodeSize}
@@ -87,6 +107,20 @@ export default function FamilyTree({ treeData }: FamilyTreeProps) {
         orientation="vertical"
         initialDepth={1}
       />
+      <div className="absolute bottom-30 right-5 md:bottom-14 md:right-14 z-50 flex flex-col gap-2">
+        <button
+          onClick={() => setZoom((z) => Math.min(z + 0.1, 2))}
+          className="btn btn-circle bg-white shadow-md text-xl"
+        >
+          +
+        </button>
+        <button
+          onClick={() => setZoom((z) => Math.max(z - 0.1, 0.1))}
+          className="btn btn-circle bg-white shadow-md text-xl"
+        >
+          −
+        </button>
+      </div>
     </div>
   );
 }

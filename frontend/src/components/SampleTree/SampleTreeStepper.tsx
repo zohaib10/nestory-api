@@ -1,6 +1,6 @@
 "use client";
 
-import { setPerson, setTree } from "@/utils";
+import { calculateAge, setTree, setTreeData } from "@/utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -22,7 +22,7 @@ type SampleTreeState = {
     firstName: string;
     lastName: string;
     gender: "male" | "female";
-    birth_date?: string;
+    birth_day?: string;
   };
 };
 
@@ -37,8 +37,17 @@ export const SampleTreeStepper = () => {
   };
 
   const handleSaveSampleTree = () => {
-    setTree(state.tree);
-    setPerson(state.person);
+    const { person, tree } = state;
+    const { firstName, gender, lastName, birth_day } = person || {};
+    setTree(tree);
+    console.log("Person", person);
+    setTreeData({
+      name: `${firstName} ${lastName}`,
+      attributes: {
+        age: birth_day ? calculateAge(birth_day) : undefined,
+        gender,
+      },
+    });
     router.push("/sample/tree");
   };
 
