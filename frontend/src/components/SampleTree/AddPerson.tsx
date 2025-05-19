@@ -6,7 +6,7 @@ type PersonFormValues = {
   firstName: string;
   lastName: string;
   gender: "male" | "female";
-  birth_day?: string;
+  birthDay?: string;
 };
 
 export const AddPerson = ({
@@ -22,7 +22,7 @@ export const AddPerson = ({
     formState: { errors },
   } = useForm<PersonFormValues>({
     defaultValues: {
-      birth_day: person?.birth_day,
+      birthDay: person?.birthDay,
       firstName: person?.firstName,
       gender: person?.gender,
       lastName: person?.lastName,
@@ -90,12 +90,12 @@ export const AddPerson = ({
       <div>
         <label className="label">
           <span className="label-text text-base font-medium">
-            birth_day (optional)
+            birthDay (optional)
           </span>
         </label>
         <input
           type="date"
-          {...register("birth_day")}
+          {...register("birthDay")}
           className="input input-bordered w-full"
         />
       </div>

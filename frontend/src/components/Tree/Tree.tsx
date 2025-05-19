@@ -11,6 +11,7 @@ const renderForeignObjectNode = ({
   nodeDatum,
   toggleNode,
   foreignObjectProps,
+  editPerson,
 }: any) => (
   <g>
     <foreignObject
@@ -21,16 +22,12 @@ const renderForeignObjectNode = ({
     >
       <div
         className={`flex bg-white shadow-md rounded-md h-24 border-t-4 ${
-          nodeDatum.attributes?.gender === "male"
-            ? "border-blue-500"
-            : "border-pink-400"
+          nodeDatum?.gender === "male" ? "border-blue-500" : "border-pink-400"
         }`}
         onClick={toggleNode}
       >
         <Image
-          src={
-            nodeDatum.attributes?.gender === "male" ? "/man.png" : "/women.png"
-          }
+          src={nodeDatum?.gender === "male" ? "/man.png" : "/women.png"}
           alt="placeholder"
           height={100}
           width={100}
@@ -38,10 +35,15 @@ const renderForeignObjectNode = ({
         <div className="flex flex-1 flex-col justify-between">
           <div className="flex justify-between flex-2">
             <div className="flex flex-col mt-2 ml-1">
-              <p>{nodeDatum.name}</p>
-              <p>Age: {nodeDatum.attributes?.age}</p>
+              <p>
+                {nodeDatum.firstName} {nodeDatum.lastName}
+              </p>
+              {nodeDatum?.age && <p>Age: {nodeDatum?.age}</p>}
             </div>
-            <button className="btn btn-circle w-8 h-8 bg-white border-0">
+            <button
+              onClick={() => editPerson(nodeDatum.id)}
+              className="btn btn-circle w-8 h-8 bg-white border-0"
+            >
               <Image src="/edit.png" alt="more" height={10} width={30} />
             </button>
           </div>
@@ -61,9 +63,14 @@ const renderForeignObjectNode = ({
 type FamilyTreeProps = {
   treeData: RawNodeDatum | RawNodeDatum[];
   treeName: string;
+  editPerson: (id: string) => void;
 };
 
-export default function FamilyTree({ treeData, treeName }: FamilyTreeProps) {
+export default function FamilyTree({
+  treeData,
+  treeName,
+  editPerson,
+}: FamilyTreeProps) {
   const [translate, containerRef, setTranslate] = useCenteredTree();
   const nodeSize = { x: 250, y: 300 };
   const separation = { siblings: 2, nonSiblings: 2 };
@@ -107,25 +114,15 @@ export default function FamilyTree({ treeData, treeName }: FamilyTreeProps) {
         transitionDuration={1000}
         pathFunc="elbow"
         renderCustomNodeElement={(rd3tProps) =>
-          renderForeignObjectNode({ ...rd3tProps, foreignObjectProps })
+          renderForeignObjectNode({
+            ...rd3tProps,
+            foreignObjectProps,
+            editPerson,
+          })
         }
         orientation="vertical"
         initialDepth={1}
       />
-      <div className="absolute bottom-30 right-5 md:bottom-14 md:right-14 z-50 flex flex-col gap-2">
-        <button
-          onClick={() => setZoom((z) => Math.min(z + 0.1, 2))}
-          className="btn btn-circle bg-white shadow-md text-xl"
-        >
-          +
-        </button>
-        <button
-          onClick={() => setZoom((z) => Math.max(z - 0.1, 0.1))}
-          className="btn btn-circle bg-white shadow-md text-xl"
-        >
-          −
-        </button>
-      </div>
     </div>
   );
 }

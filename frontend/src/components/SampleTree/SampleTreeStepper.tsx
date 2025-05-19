@@ -22,7 +22,7 @@ type SampleTreeState = {
     firstName: string;
     lastName: string;
     gender: "male" | "female";
-    birth_day?: string;
+    birthDay?: string;
   };
 };
 
@@ -38,16 +38,18 @@ export const SampleTreeStepper = () => {
 
   const handleSaveSampleTree = () => {
     const { person, tree } = state;
-    const { firstName, gender, lastName, birth_day } = person || {};
+    const { firstName, gender, lastName, birthDay } = person || {};
     setTree(tree);
-    console.log("Person", person);
-    setTreeData({
-      name: `${firstName} ${lastName}`,
-      attributes: {
-        age: birth_day ? calculateAge(birth_day) : undefined,
+    setTreeData([
+      {
+        id: crypto.randomUUID().toString(),
+        firstName,
+        lastName,
         gender,
+        age: birthDay ? calculateAge(birthDay) : undefined,
+        birthDay,
       },
-    });
+    ]);
     router.push("/sample/tree");
   };
 

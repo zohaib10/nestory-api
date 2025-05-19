@@ -33,7 +33,6 @@ export default function Home() {
             </button>
             <button
               onClick={() => {
-                console.log("button clicked");
                 router.push("/sample");
               }}
               className="btn btn-outline btn-md md:btn-lg w-auto mb-4"
