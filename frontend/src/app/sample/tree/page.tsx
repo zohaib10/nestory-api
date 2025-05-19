@@ -27,7 +27,7 @@ export default function SampleTree() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [userId, setUserId] = useState<string | undefined>();
   const [user, setUser] = useState<Person | undefined>();
-  const [tree, _] = useState(getTree());
+  const tree = getTree();
   const [treeData, saveTreeData] = useState(getTreeData());
 
   useEffect(() => {
