@@ -15,7 +15,7 @@ export const AddRelationshipForm = ({
       firstName: "",
       lastName: "",
       gender: "Male",
-      relationshipType: "Parent",
+      relationshipType: "parent",
       birthDay: "",
     },
   });
