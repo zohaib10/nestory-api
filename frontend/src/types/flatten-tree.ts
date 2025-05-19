@@ -7,6 +7,5 @@ export type PersonTreeNode = {
   gender: string;
   attributes?: Record<string, any>;
   avatarUrl?: string;
-
   children?: PersonTreeNode[];
 };

@@ -69,6 +69,7 @@ export default function SampleTree() {
         treeData={treeData}
         treeName={tree.name}
         editPerson={(id: string) => {
+          console.log("Edit person ");
           setShowAddModal(true);
           setUserId(id);
         }}

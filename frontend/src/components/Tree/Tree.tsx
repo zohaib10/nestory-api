@@ -24,6 +24,7 @@ const renderForeignObjectNode = ({
         className={`flex bg-white shadow-md rounded-md h-24 border-t-4 ${
           nodeDatum?.gender === "male" ? "border-blue-500" : "border-pink-400"
         }`}
+        style={{ pointerEvents: "all" }}
         onClick={toggleNode}
       >
         <Image
@@ -41,8 +42,11 @@ const renderForeignObjectNode = ({
               {nodeDatum?.age && <p>Age: {nodeDatum?.age}</p>}
             </div>
             <button
-              onClick={() => editPerson(nodeDatum.id)}
-              className="btn btn-circle w-8 h-8 bg-white border-0"
+              onClick={() => {
+                console.log("Here bro");
+                editPerson(nodeDatum.id);
+              }}
+              className="btn btn-circle w-8 h-8 bg-red-600 border-0"
             >
               <Image src="/edit.png" alt="more" height={10} width={30} />
             </button>
@@ -74,7 +78,7 @@ export default function FamilyTree({
   const [translate, containerRef, setTranslate] = useCenteredTree();
   const nodeSize = { x: 250, y: 300 };
   const separation = { siblings: 2, nonSiblings: 2 };
-  const [zoom, setZoom] = useState(0.5);
+  const [zoom, setZoom] = useState(1);
 
   const foreignObjectProps = {
     width: nodeSize.x,
