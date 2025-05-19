@@ -43,7 +43,6 @@ const renderForeignObjectNode = ({
             </div>
             <button
               onClick={() => {
-                console.log("Here bro");
                 editPerson(nodeDatum.id);
               }}
               className="btn btn-circle w-8 h-8 border-0"

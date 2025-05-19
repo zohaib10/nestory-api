@@ -1,8 +1,9 @@
 "use client";
 
 import { AddUserModal } from "@/components/Modals";
-import { Person } from "@/types";
+import { Person, PersonTreeNode, RelationshipFormData } from "@/types";
 import {
+  addRelationshipToTree,
   flattenTree,
   getTree,
   getTreeData,
@@ -55,6 +56,27 @@ export default function SampleTree() {
     handleUserFind();
   };
 
+  const handleRelationshipUpdate = (data: RelationshipFormData) => {
+    if (userId) {
+      const person: PersonTreeNode = {
+        firstName: data.firstName,
+        gender: data.gender,
+        lastName: data.lastName,
+        birthDay: data.birthDay,
+        id: crypto.randomUUID(),
+      };
+      const newTreeData = addRelationshipToTree(
+        treeData,
+        userId,
+        person,
+        data.relationshipType
+      );
+
+      setTreeData(newTreeData);
+      saveTreeData(newTreeData);
+    }
+  };
+
   return (
     <>
       {userId && (
@@ -63,13 +85,13 @@ export default function SampleTree() {
           onClose={() => setShowAddModal(false)}
           user={user}
           updateUser={handleUpdateUser}
+          onAddRelation={handleRelationshipUpdate}
         />
       )}
       <TreeCanvas
         treeData={treeData}
         treeName={tree.name}
         editPerson={(id: string) => {
-          console.log("Edit person ");
           setShowAddModal(true);
           setUserId(id);
         }}

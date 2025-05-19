@@ -1,2 +1,3 @@
-export * from "./flatten-tree";
 export * from "./person";
+export * from "./person-tree";
+export * from "./relationship";

@@ -8,4 +8,5 @@ export type PersonTreeNode = {
   attributes?: Record<string, any>;
   avatarUrl?: string;
   children?: PersonTreeNode[];
+  spouse?: PersonTreeNode[];
 };

@@ -1,6 +1,7 @@
 "use client";
+import { RelationshipView } from "@/components/Relationship";
 import { UpdateUserForm } from "@/components/User";
-import { Person } from "@/types";
+import { Person, RelationshipFormData } from "@/types";
 import Image from "next/image";
 
 type AddUserModalProps = {
@@ -8,6 +9,7 @@ type AddUserModalProps = {
   onClose: () => void;
   user?: Person;
   updateUser: (u: Person) => void;
+  onAddRelation: (d: RelationshipFormData) => void;
 };
 
 export const AddUserModal = ({
@@ -15,6 +17,7 @@ export const AddUserModal = ({
   onClose,
   user,
   updateUser,
+  onAddRelation,
 }: AddUserModalProps) => {
   return (
     <>
@@ -53,18 +56,7 @@ export const AddUserModal = ({
               aria-label="Relationships"
             />
             <div className="tab-content bg-base-100 p-4">
-              <select className="select select-bordered w-full">
-                <option disabled value="">
-                  Relationship Type
-                </option>
-                <option>Parent</option>
-                <option>Child</option>
-                <option>Spouse</option>
-                <option>Sibling</option>
-              </select>
-              <button className="btn btn-outline mt-3">
-                + Add Relationship
-              </button>
+              <RelationshipView onAddRelation={onAddRelation} />
             </div>
 
             <input

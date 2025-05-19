@@ -1,4 +1,4 @@
-import { PersonTreeNode } from "./flatten-tree";
+import { PersonTreeNode } from "./person-tree";
 
 export type Person = Omit<PersonTreeNode, "children"> & {
   parentId?: string;
