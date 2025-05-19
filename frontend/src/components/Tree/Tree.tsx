@@ -46,7 +46,7 @@ const renderForeignObjectNode = ({
                 console.log("Here bro");
                 editPerson(nodeDatum.id);
               }}
-              className="btn btn-circle w-8 h-8 bg-red-600 border-0"
+              className="btn btn-circle w-8 h-8 border-0"
             >
               <Image src="/edit.png" alt="more" height={10} width={30} />
             </button>

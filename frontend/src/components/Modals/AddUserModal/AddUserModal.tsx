@@ -16,15 +16,6 @@ export const AddUserModal = ({
   user,
   updateUser,
 }: AddUserModalProps) => {
-  // useEffect(() => {
-  //   const modal = document.getElementById("tab_modal") as HTMLDialogElement;
-  //   if (isOpen) {
-  //     modal.showModal();
-  //   } else {
-  //     modal.close();
-  //   }
-  // }, [isOpen]);
-  console.log("HERE");
   return (
     <>
       <input
@@ -36,10 +27,12 @@ export const AddUserModal = ({
       />
       <div className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Manage Info</h3>
-          <button className="btn btn-circle" onClick={onClose}>
-            <Image src="/close.png" alt="close" width={14} height={10} />
-          </button>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="font-bold text-lg">Manage Info</h3>
+            <button className="btn btn-circle" onClick={onClose}>
+              <Image src="/close.png" alt="close" width={14} height={10} />
+            </button>
+          </div>
 
           <div className="tabs tabs-box">
             <input
