@@ -16,6 +16,9 @@ import { useEffect, useState } from "react";
 const TreeCanvas = dynamic(() => import("@/components/Tree/Tree"), {
   ssr: false,
 });
+const Tree = dynamic(() => import("@/components/Tree/Tree1"), {
+  ssr: false,
+});
 
 const ErrorModal = dynamic(
   () => import("@/components/Modals/ErrorModal/ErrorModal"),
@@ -88,14 +91,15 @@ export default function SampleTree() {
           onAddRelation={handleRelationshipUpdate}
         />
       )}
-      <TreeCanvas
+      <Tree />
+      {/* <TreeCanvas
         treeData={treeData}
         treeName={tree.name}
         editPerson={(id: string) => {
           setShowAddModal(true);
           setUserId(id);
         }}
-      />
+      /> */}
     </>
   );
 }
