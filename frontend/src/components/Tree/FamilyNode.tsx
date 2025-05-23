@@ -1,44 +1,58 @@
 import Image from "next/image";
 import React, { useCallback } from "react";
 import type { ExtNode } from "relatives-tree/lib/types";
-import css from "./FamilyNode.module.css";
+
+export type Node = ExtNode & {
+  age: number;
+  firstName: string;
+  lastName: string;
+  birthday: string;
+};
 
 interface FamilyNodeProps {
-  node: ExtNode & {
-    age: number;
-  };
-  isRoot: boolean;
-  isHover?: boolean;
-  onClick: (id: string) => void;
+  node: Node;
+  onClick: () => void;
   onSubClick: (id: string) => void;
   style?: React.CSSProperties;
 }
 
 export const FamilyNode = ({
   node,
-  isRoot,
-  isHover,
   onClick,
   onSubClick,
   style,
 }: FamilyNodeProps) => {
-  const clickHandler = useCallback(() => onClick(node.id), [node.id, onClick]);
   const clickSubHandler = useCallback(
     () => onSubClick(node.id),
     [node.id, onSubClick]
   );
-  console.log(node, " is node");
   return (
     <div className="absolute flex p-[10px]" style={style}>
       <div
-        className={`flex flex-1 items-center justify-center bg-white shadow-md rounded-md border-t-2 overflow-hidden cursor-pointer ${
+        className={`w-full h-full flex items-center bg-white shadow-md rounded-md border-t-2 p-[2px] overflow-hidden cursor-pointer ${
           node.gender === "male" ? "border-blue-500" : "border-pink-400"
         }`}
-        onClick={clickHandler}
       >
-        {/* {node?.age && <p>{node.age}</p>} */}
-        <div className={css.id}>{node.id}</div>
+        <Image
+          src={node?.gender === "male" ? "/man.png" : "/women.png"}
+          alt="placeholder"
+          height={24}
+          width={24}
+          unoptimized
+        />
+        <div className="flex flex-col pl-[2px]">
+          <p className="text-[6px]">
+            {node.firstName} {node.lastName}
+          </p>
+          {node.age && <p className="text-[5px]">age: {node.age}</p>}
+        </div>
       </div>
+      <button
+        onClick={onClick}
+        className="btn btn-circle w-4 h-4 bg-white absolute top-[6px] right-[8px]"
+      >
+        <Image src="/pencil.png" alt="down" height={8} width={6} />
+      </button>
       {node.hasSubTree && (
         <button
           onClick={clickSubHandler}
@@ -46,15 +60,7 @@ export const FamilyNode = ({
         >
           <Image src="/link.png" alt="down" height={8} width={6} />
         </button>
-        // <div
-        //   className={classNames(css.sub, css[node.gender])}
-        //   onClick={clickSubHandler}
-        // />
       )}
     </div>
   );
-};
-
-type NodeProps = {
-  node: ExtNode;
 };

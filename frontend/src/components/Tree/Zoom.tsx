@@ -1,47 +1,61 @@
-import classNames from "classnames";
-import { create } from "pinch-zoom-pan";
-import React, { useEffect, useRef } from "react";
+"use client";
 
-import css from "./PinchZoomPan.module.css";
+import Image from "next/image";
+import {
+  TransformComponent,
+  TransformWrapper,
+  useControls,
+} from "react-zoom-pan-pinch";
 
 interface PinchZoomPanProps {
-  min?: number;
-  max?: number;
-  captureWheel?: boolean;
-  className?: string;
-  style?: React.CSSProperties;
   children: React.ReactNode;
 }
 
-export const PinchZoomPan = ({
-  min,
-  max,
-  captureWheel,
-  className,
-  style,
-  children,
-}: PinchZoomPanProps) => {
-  const root = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const element = root.current;
-    if (!element) return;
-    const canvas = create({
-      element,
-      minZoom: min,
-      maxZoom: max,
-      captureWheel,
-    });
-    return canvas.destroy;
-  }, [min, max, captureWheel]);
+const Controls = () => {
+  const { zoomIn, zoomOut, resetTransform } = useControls();
 
   return (
-    <div ref={root} className={classNames(className, css.root)} style={style}>
-      <div className={css.point}>
-        <div className="absolute translate-x-[-50%] translate-y-[-50%] cursor-pointer">
-          {children}
-        </div>
-      </div>
+    <div className="absolute top-1 left-1 z-10 bg-white shadow-lg rounded-3xl p-3 flex flex-col gap-2">
+      <button
+        onClick={() => zoomIn()}
+        className="w-8 h-8 btn btn-circle btn-primary shadow"
+      >
+        <Image src="/plus.png" alt="+" height={8} width={20} />
+      </button>
+
+      <button
+        onClick={() => zoomOut()}
+        className="w-8 h-8 btn btn-circle btn-primary shadow"
+      >
+        <Image src="/minus.png" alt="-" height={8} width={20} />
+      </button>
+
+      <button
+        onClick={() => resetTransform()}
+        className="w-8 h-8 btn btn-circle btn-primary shadow"
+      >
+        <Image src="/reset.png" alt="x" height={8} width={20} />
+      </button>
     </div>
+  );
+};
+
+export const PinchZoomPan = ({ children }: PinchZoomPanProps) => {
+  return (
+    <TransformWrapper
+      initialScale={1.5}
+      initialPositionX={200}
+      initialPositionY={100}
+      smooth
+    >
+      {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+        <>
+          <Controls />
+          <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
+            {children}
+          </TransformComponent>
+        </>
+      )}
+    </TransformWrapper>
   );
 };

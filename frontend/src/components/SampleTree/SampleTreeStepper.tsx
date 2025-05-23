@@ -48,6 +48,10 @@ export const SampleTreeStepper = () => {
         gender,
         age: birthDay ? calculateAge(birthDay) : undefined,
         birthDay,
+        spouses: [],
+        siblings: [],
+        children: [],
+        parents: [],
       },
     ]);
     router.push("/sample/tree");
