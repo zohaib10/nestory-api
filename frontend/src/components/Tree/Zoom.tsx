@@ -48,7 +48,7 @@ export const PinchZoomPan = ({ children }: PinchZoomPanProps) => {
       initialPositionY={100}
       smooth
     >
-      {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+      {() => (
         <>
           <Controls />
           <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
