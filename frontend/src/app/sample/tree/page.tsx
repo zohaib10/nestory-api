@@ -5,6 +5,7 @@ import { PersonTreeNode, RelationshipFormData } from "@/types";
 import {
   addRelationshipToTree,
   calculateAge,
+  getRelations,
   getTree,
   getTreeData,
   setTreeData,
@@ -136,6 +137,7 @@ export default function SampleTree() {
           isOpen={showAddModal}
           onClose={() => setShowAddModal(false)}
           user={user}
+          relations={getRelations(treeData, userId)}
           updateUser={handleUpdateUser}
           onAddRelation={handleRelationshipUpdate}
         />

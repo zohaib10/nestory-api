@@ -5,6 +5,10 @@ export type Relationship = {
   type: string;
 };
 
+export type PersonRelationShip = PersonTreeNode & {
+  type: "spouse" | "sibling" | "parent" | "child";
+};
+
 export type PersonTreeNode = {
   id: string; // unique UUID or string ID
   firstName: string;

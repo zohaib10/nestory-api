@@ -1,7 +1,11 @@
 "use client";
 import { RelationshipView } from "@/components/Relationship";
 import { UpdateUserForm } from "@/components/User";
-import { PersonTreeNode, RelationshipFormData } from "@/types";
+import {
+  PersonRelationShip,
+  PersonTreeNode,
+  RelationshipFormData,
+} from "@/types";
 import Image from "next/image";
 
 type AddUserModalProps = {
@@ -10,6 +14,7 @@ type AddUserModalProps = {
   user?: PersonTreeNode;
   updateUser: (u: PersonTreeNode) => void;
   onAddRelation: (d: RelationshipFormData) => void;
+  relations: PersonRelationShip[];
 };
 
 export const AddUserModal = ({
@@ -18,6 +23,7 @@ export const AddUserModal = ({
   user,
   updateUser,
   onAddRelation,
+  relations,
 }: AddUserModalProps) => {
   return (
     <>
@@ -56,7 +62,10 @@ export const AddUserModal = ({
               aria-label="Relationships"
             />
             <div className="tab-content bg-base-100 p-4">
-              <RelationshipView onAddRelation={onAddRelation} />
+              <RelationshipView
+                onAddRelation={onAddRelation}
+                relations={relations}
+              />
             </div>
 
             <input

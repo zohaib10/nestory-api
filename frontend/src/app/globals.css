@@ -8,6 +8,7 @@
   default: true;
   --color-primary: "#3442D9";
   --color-secondary: "#fff";
+  --color-error: "#DC143C";
 }
 
 [data-theme="light"] {
