@@ -4,6 +4,7 @@ import { AddUserModal } from "@/components/Modals";
 import { Person, PersonTreeNode, RelationshipFormData } from "@/types";
 import {
   addRelationshipToTree,
+  calculateAge,
   flattenTree,
   getTree,
   getTreeData,
@@ -26,97 +27,47 @@ const ErrorModal = dynamic(
 
 // const nodes = [
 //   {
-//     id: "goku",
-//     age: 10,
-//     firstName: "Goku",
-//     lastName: "Son",
-//     gender: "male" as any,
-//     parents: [{ id: "bardock", type: "biological" }],
+//     firstName: "Suhaib",
+//     gender: "male",
+//     lastName: "Ahmad",
+//     birthDay: "1995-04-04",
+//     id: "b8f7e75c-f75e-4fc8-b467-aeb77a5249a7",
+//     age: "30 years",
+//     spouses: [{ id: "170c7de3-2c45-4f5c-9c3a-269876906e28", type: "married" }],
 //     children: [
-//       { id: "gohan", type: "biological" },
-//       { id: "goten", type: "biological" },
+//       { id: "d2b2c950-91e9-4495-99c2-c0dd3f6ce66d", type: "biological" },
 //     ],
-//     siblings: [{ id: "raditz", type: "biological" }],
-//     spouses: [{ id: "chi-chi", type: "married" }],
+//     parents: [],
+//     siblings: [],
 //   },
 //   {
-//     id: "chi-chi",
-//     gender: "female" as any,
-//     parents: [{ id: "ox-king", type: "biological" }],
+//     id: "d2b2c950-91e9-4495-99c2-c0dd3f6ce66d",
+//     firstName: "Ismail",
+//     lastName: "Awan",
+//     gender: "male",
+//     age: "2 months",
+//     birthDay: "2025-03-04",
+//     spouses: [],
+//     siblings: [],
+//     children: [],
+//     parents: [
+//       { id: "b8f7e75c-f75e-4fc8-b467-aeb77a5249a7", type: "biological" },
+//     ],
+//   },
+
+//   {
+//     firstName: "Samirah",
+//     gender: "female",
+//     lastName: "Ahmad",
+//     birthDay: "1995-04-04",
+//     id: "170c7de3-2c45-4f5c-9c3a-269876906e28",
+//     age: "30 years",
+//     spouses: [{ id: "b8f7e75c-f75e-4fc8-b467-aeb77a5249a7", type: "married" }],
 //     children: [
-//       { id: "gohan", type: "biological" },
-//       { id: "goten", type: "biological" },
+//       { id: "d2b2c950-91e9-4495-99c2-c0dd3f6ce66d", type: "biological" },
 //     ],
-//     siblings: [],
-//     spouses: [{ id: "goku", type: "married" }],
-//   },
-//   {
-//     id: "gohan",
-//     gender: "male" as any,
-//     parents: [
-//       { id: "goku", type: "biological" },
-//       { id: "chi-chi", type: "biological" },
-//     ],
-//     children: [{ id: "pan", type: "biological" }],
-//     siblings: [{ id: "goten", type: "biological" }],
-//     spouses: [{ id: "videl", type: "married" }],
-//   },
-//   {
-//     id: "goten",
-//     gender: "male" as any,
-//     parents: [
-//       { id: "goku", type: "biological" },
-//       { id: "chi-chi", type: "biological" },
-//     ],
-//     children: [],
-//     siblings: [{ id: "gohan", type: "biological" }],
-//     spouses: [],
-//   },
-//   {
-//     id: "videl",
-//     gender: "female" as any,
 //     parents: [],
-//     children: [{ id: "pan", type: "biological" }],
 //     siblings: [],
-//     spouses: [{ id: "gohan", type: "married" }],
-//   },
-//   {
-//     id: "pan",
-//     gender: "female" as any,
-//     parents: [
-//       { id: "gohan", type: "biological" },
-//       { id: "videl", type: "biological" },
-//     ],
-//     children: [],
-//     siblings: [],
-//     spouses: [],
-//   },
-//   {
-//     id: "raditz",
-//     gender: "male" as any,
-//     parents: [{ id: "bardock", type: "biological" }],
-//     children: [],
-//     siblings: [{ id: "goku", type: "biological" }],
-//     spouses: [],
-//   },
-//   {
-//     id: "bardock",
-//     gender: "male" as any,
-//     parents: [],
-//     children: [
-//       { id: "goku", type: "biological" },
-//       { id: "raditz", type: "biological" },
-//     ],
-//     siblings: [],
-//     spouses: [],
-//   },
-//   {
-//     id: "ox-king",
-//     gender: "male" as any,
-//     parents: [],
-//     children: [{ id: "chi-chi", type: "biological" }],
-//     siblings: [],
-//     spouses: [],
 //   },
 // ];
 
@@ -160,11 +111,16 @@ export default function SampleTree() {
         lastName: data.lastName,
         birthDay: data.birthDay,
         id: crypto.randomUUID(),
+        age: data.birthDay ? calculateAge(data.birthDay) : undefined,
+        spouses: [],
+        children: [],
+        parents: [],
+        siblings: [],
       };
       const newTreeData = addRelationshipToTree(
         treeData,
-        userId,
         person,
+        userId,
         data.relationshipType
       );
 
@@ -172,7 +128,7 @@ export default function SampleTree() {
       saveTreeData(newTreeData);
     }
   };
-  console.log("userId ", userId, showAddModal);
+
   return (
     <>
       {userId && (
@@ -191,14 +147,6 @@ export default function SampleTree() {
           setUserId(id);
         }}
       />
-      {/* <TreeCanvas
-        treeData={treeData}
-        treeName={tree.name}
-        editPerson={(id: string) => {
-          setShowAddModal(true);
-          setUserId(id);
-        }}
-      /> */}
     </>
   );
 }

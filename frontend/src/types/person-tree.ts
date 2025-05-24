@@ -1,3 +1,10 @@
+export type RelationshipType = "parent" | "child" | "spouse" | "sibling";
+
+export type Relationship = {
+  id: string;
+  type: string;
+};
+
 export type PersonTreeNode = {
   id: string; // unique UUID or string ID
   firstName: string;
@@ -7,6 +14,9 @@ export type PersonTreeNode = {
   gender: string;
   attributes?: Record<string, any>;
   avatarUrl?: string;
-  children?: PersonTreeNode[];
-  spouse?: PersonTreeNode[];
+  children: Relationship[];
+  spouses: Relationship[];
+  parents: Relationship[];
+  siblings: Relationship[];
+  age?: string;
 };

@@ -51,14 +51,14 @@ export const FamilyNode = ({
         onClick={onClick}
         className="btn btn-circle w-4 h-4 bg-white absolute top-[6px] right-[8px]"
       >
-        <Image src="/pencil.png" alt="down" height={8} width={6} />
+        <Image src="/pencil.png" alt="down" height={8} width={6} unoptimized />
       </button>
       {node.hasSubTree && (
         <button
           onClick={clickSubHandler}
           className="btn btn-circle w-4 h-4 bg-white absolute bottom-[6px] right-[8px]"
         >
-          <Image src="/link.png" alt="down" height={8} width={6} />
+          <Image src="/link.png" alt="down" height={8} width={6} unoptimized />
         </button>
       )}
     </div>
