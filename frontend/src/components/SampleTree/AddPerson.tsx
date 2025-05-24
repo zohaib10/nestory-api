@@ -19,18 +19,19 @@ export const AddPerson = ({
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<PersonFormValues>();
-
-  const handleFormSubmit = (data: PersonFormValues) => {
-    onSubmit(data);
-    reset();
-  };
+  } = useForm<PersonFormValues>({
+    defaultValues: {
+      birthDay: person?.birthDay,
+      firstName: person?.firstName,
+      gender: person?.gender,
+      lastName: person?.lastName,
+    },
+  });
 
   return (
     <form
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
       className="card bg-base-100 shadow-md md:p-6 w-full max-w-md mx-auto space-y-4"
     >
       <h2 className="text-2xl font-semibold text-center">Add a Person</h2>

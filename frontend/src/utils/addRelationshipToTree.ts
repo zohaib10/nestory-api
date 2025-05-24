@@ -6,7 +6,6 @@ export function normalizeTreeAfterInsert(
   newPerson: PersonTreeNode,
   relationshipType: RelationshipType
 ): PersonTreeNode[] {
-  const getNode = (id: string) => tree.find((p) => p.id === id);
   const link = (arr: Relationship[], id: string, type = "biological") =>
     arr.some((r) => r.id === id) ? arr : [...arr, { id, type }];
 
