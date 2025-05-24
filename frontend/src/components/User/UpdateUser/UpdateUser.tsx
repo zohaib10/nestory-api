@@ -1,10 +1,10 @@
-import { Person } from "@/types";
+import { PersonTreeNode } from "@/types";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 type UpdateUserFormProps = {
-  user?: Person;
-  updateUser: (u: Person) => void;
+  user?: PersonTreeNode;
+  updateUser: (u: PersonTreeNode) => void;
 };
 
 export const UpdateUserForm = ({ user, updateUser }: UpdateUserFormProps) => {
@@ -13,7 +13,7 @@ export const UpdateUserForm = ({ user, updateUser }: UpdateUserFormProps) => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<Person>({
+  } = useForm<PersonTreeNode>({
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -33,7 +33,7 @@ export const UpdateUserForm = ({ user, updateUser }: UpdateUserFormProps) => {
     }
   }, [user, reset]);
 
-  const onSubmit = (data: Person) => {
+  const onSubmit = (data: PersonTreeNode) => {
     updateUser({ ...data, id: user?.id || "" });
   };
 

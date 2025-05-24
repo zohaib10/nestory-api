@@ -1,14 +1,14 @@
 "use client";
 import { RelationshipView } from "@/components/Relationship";
 import { UpdateUserForm } from "@/components/User";
-import { Person, RelationshipFormData } from "@/types";
+import { PersonTreeNode, RelationshipFormData } from "@/types";
 import Image from "next/image";
 
 type AddUserModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  user?: Person;
-  updateUser: (u: Person) => void;
+  user?: PersonTreeNode;
+  updateUser: (u: PersonTreeNode) => void;
   onAddRelation: (d: RelationshipFormData) => void;
 };
 

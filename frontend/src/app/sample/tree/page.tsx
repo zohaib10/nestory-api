@@ -1,11 +1,10 @@
 "use client";
 
 import { AddUserModal } from "@/components/Modals";
-import { Person, PersonTreeNode, RelationshipFormData } from "@/types";
+import { PersonTreeNode, RelationshipFormData } from "@/types";
 import {
   addRelationshipToTree,
   calculateAge,
-  flattenTree,
   getTree,
   getTreeData,
   setTreeData,
@@ -74,7 +73,7 @@ const ErrorModal = dynamic(
 export default function SampleTree() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [userId, setUserId] = useState<string | undefined>();
-  const [user, setUser] = useState<Person | undefined>();
+  const [user, setUser] = useState<PersonTreeNode | undefined>();
   const tree = getTree();
   const [treeData, saveTreeData] = useState(getTreeData());
 
@@ -91,12 +90,12 @@ export default function SampleTree() {
   }
 
   const handleUserFind = () => {
-    const users = flattenTree(getTreeData());
+    const users = getTreeData() as PersonTreeNode[];
     const user = users.find((user) => user.id === userId);
     setUser(user);
   };
 
-  const handleUpdateUser = (data: Person) => {
+  const handleUpdateUser = (data: PersonTreeNode) => {
     const newTreeData = updatePersonById(treeData, data);
     setTreeData(newTreeData);
     saveTreeData(newTreeData);
