@@ -24,7 +24,7 @@ export default function Tree({ nodes, editPerson }: TreeProps) {
   const [rootId, setRootId] = useState(firstNodeId);
 
   return (
-    <div className="bg-gray-200 w-full h-[600px] relative">
+    <div className="bg-gray-200 w-full h-[600px] relative" id="family-tree">
       {nodes.length > 0 && (
         <PinchZoomPan>
           <ReactFamilyTree

@@ -36,6 +36,12 @@ const Controls = () => {
       >
         <Image src="/reset.png" alt="x" height={8} width={20} />
       </button>
+      {/* <button
+        onClick={() => downloadPng()}
+        className="w-8 h-8 btn btn-circle btn-primary shadow"
+      >
+        <Image src="/download.png" alt="x" height={8} width={20} color="#fff" />
+      </button> */}
     </div>
   );
 };

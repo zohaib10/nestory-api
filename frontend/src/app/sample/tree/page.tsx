@@ -126,6 +126,7 @@ export default function SampleTree() {
 
       setTreeData(newTreeData);
       saveTreeData(newTreeData);
+      setShowAddModal(false);
     }
   };
 

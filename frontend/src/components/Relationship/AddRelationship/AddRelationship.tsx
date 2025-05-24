@@ -9,6 +9,7 @@ export const AddRelationshipForm = ({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<RelationshipFormData>({
     defaultValues: {
@@ -20,8 +21,13 @@ export const AddRelationshipForm = ({
     },
   });
 
+  const handleFormSubmit = (data: RelationshipFormData) => {
+    onSubmit(data);
+    reset();
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
       <div>
         <label className="label">
           <span className="label-text">First Name</span>

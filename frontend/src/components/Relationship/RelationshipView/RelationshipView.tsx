@@ -22,6 +22,7 @@ export const RelationshipView = ({ onAddRelation }: RelationshipViewProps) => {
           </button>
           <AddRelationshipForm
             onSubmit={(data) => {
+              setView("default");
               onAddRelation(data);
             }}
           />
