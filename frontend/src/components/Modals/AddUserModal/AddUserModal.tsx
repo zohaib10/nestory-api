@@ -1,4 +1,5 @@
 "use client";
+import GatedFeatures from "@/components/GatedFeatures/GatedFeatures";
 import { RelationshipView } from "@/components/Relationship";
 import { UpdateUserForm } from "@/components/User";
 import {
@@ -79,11 +80,7 @@ export const AddUserModal = ({
             />
             {/* ability to add multiple stories by person and attach pictures to each... can the user pick who to share with? */}
             <div className="tab-content bg-base-100 p-4">
-              <textarea
-                className="textarea textarea-bordered w-full"
-                rows={6}
-                placeholder="Write Ismail's story here..."
-              />
+              <GatedFeatures />
             </div>
           </div>
         </div>
