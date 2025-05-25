@@ -63,7 +63,7 @@ export function normalizeTreeAfterInsert(
         parent.children = link(parent.children, added.id);
         updateNode(parent);
       }
-
+      console.log("Added sibling");
       break;
     }
 

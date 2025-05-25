@@ -48,6 +48,7 @@ export default function Home() {
             alt="Landing page Tree"
             width={500}
             height={500}
+            unoptimized
           />
         </div>
       </div>

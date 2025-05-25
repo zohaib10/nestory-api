@@ -71,7 +71,6 @@ export const AddRelationshipForm = ({
           </option>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="Other">Other</option>
         </select>
         {errors.gender && (
           <p className="text-red-500 text-sm">{errors.gender.message}</p>

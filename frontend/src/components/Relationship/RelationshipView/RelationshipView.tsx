@@ -6,11 +6,13 @@ import { AddRelationshipForm } from "../AddRelationship";
 type RelationshipViewProps = {
   onAddRelation: (d: RelationshipFormData) => void;
   relations: PersonRelationShip[];
+  removeRelationship: (id: string) => void;
 };
 
 export const RelationshipView = ({
   onAddRelation,
   relations,
+  removeRelationship,
 }: RelationshipViewProps) => {
   const [view, setView] = useState<"default" | "add">("default");
 
@@ -34,7 +36,7 @@ export const RelationshipView = ({
       )}
       {view === "default" && (
         <>
-          {
+          {!!relations.length && (
             <div className="overflow-x-auto h-[210px] mb-[10px]">
               <table className="table table-zebra">
                 <thead>
@@ -52,7 +54,10 @@ export const RelationshipView = ({
                       </td>
                       <td>{relation.type}</td>
                       <td>
-                        <button className="w-8 h-8 btn btn-circle btn-error">
+                        <button
+                          onClick={() => removeRelationship(relation.id)}
+                          className="w-8 h-8 btn btn-circle btn-error"
+                        >
                           <Image
                             src="/remove.png"
                             alt="delete"
@@ -66,7 +71,7 @@ export const RelationshipView = ({
                 </tbody>
               </table>
             </div>
-          }
+          )}
 
           <button
             onClick={() => setView("add")}

@@ -8,6 +8,7 @@ import {
   getRelations,
   getTree,
   getTreeData,
+  removePersonFromTree,
   setTreeData,
   updatePersonById,
 } from "@/utils";
@@ -130,6 +131,13 @@ export default function SampleTree() {
     }
   };
 
+  const handleRemoveRelationship = (id: string) => {
+    const newTreeData = removePersonFromTree(treeData, id);
+    setTreeData(newTreeData);
+    saveTreeData(newTreeData);
+    setShowAddModal(false);
+  };
+
   return (
     <>
       {userId && (
@@ -140,6 +148,7 @@ export default function SampleTree() {
           relations={getRelations(treeData, userId)}
           updateUser={handleUpdateUser}
           onAddRelation={handleRelationshipUpdate}
+          removeRelationship={handleRemoveRelationship}
         />
       )}
       <Tree

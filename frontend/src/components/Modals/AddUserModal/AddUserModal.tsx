@@ -15,6 +15,7 @@ type AddUserModalProps = {
   updateUser: (u: PersonTreeNode) => void;
   onAddRelation: (d: RelationshipFormData) => void;
   relations: PersonRelationShip[];
+  removeRelationship: (id: string) => void;
 };
 
 export const AddUserModal = ({
@@ -24,6 +25,7 @@ export const AddUserModal = ({
   updateUser,
   onAddRelation,
   relations,
+  removeRelationship,
 }: AddUserModalProps) => {
   return (
     <>
@@ -65,6 +67,7 @@ export const AddUserModal = ({
               <RelationshipView
                 onAddRelation={onAddRelation}
                 relations={relations}
+                removeRelationship={removeRelationship}
               />
             </div>
 
