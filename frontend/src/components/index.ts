@@ -1,3 +1,4 @@
+export * from "./Auth";
 export * from "./Footer";
 export * from "./GatedFeatures";
 export * from "./Header";
