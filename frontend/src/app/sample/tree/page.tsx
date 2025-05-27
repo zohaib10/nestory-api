@@ -13,6 +13,7 @@ import {
   updatePersonById,
 } from "@/utils";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Tree = dynamic(() => import("@/components/Tree/FamilyTree"), {
@@ -79,6 +80,8 @@ export default function SampleTree() {
   const tree = getTree();
   const [treeData, saveTreeData] = useState(getTreeData());
 
+  const router = useRouter();
+
   useEffect(() => {
     if (treeData && userId) {
       handleUserFind();
@@ -87,7 +90,12 @@ export default function SampleTree() {
 
   if (!tree || !treeData) {
     return (
-      <ErrorModal message="No tree or tree data found. Please re-add your data from the Tree Sampling page." />
+      <ErrorModal title="Tree Not Found" onClose={() => router.push("/")}>
+        <p>
+          No tree or tree data found. Please re-add your data from the Tree
+          Sampling page.
+        </p>
+      </ErrorModal>
     );
   }
 

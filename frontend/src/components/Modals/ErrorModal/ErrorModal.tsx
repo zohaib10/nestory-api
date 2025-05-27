@@ -1,11 +1,16 @@
-import Link from "next/link";
-
 type ErrorModalProps = {
-  message: string;
+  children: React.ReactNode;
   open?: boolean;
+  onClose?: () => void;
+  title?: string;
 };
 
-export default function ErrorModal({ message, open = true }: ErrorModalProps) {
+export default function ErrorModal({
+  children,
+  open = true,
+  onClose,
+  title = "Error",
+}: ErrorModalProps) {
   return (
     <>
       <input
@@ -15,16 +20,17 @@ export default function ErrorModal({ message, open = true }: ErrorModalProps) {
         checked={open}
         readOnly
       />
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+      <dialog
+        id="my_modal_5"
+        className="modal modal-bottom sm:modal-middle bg-amber-50"
+      >
         <div className="modal-box border-t-4 border-red-500">
-          <h3 className="font-bold text-lg text-red-600">Error</h3>
-          <p className="py-4 text-gray-700">{message}</p>
+          <h3 className="font-bold text-lg text-red-600 mb-2">{title}</h3>
+          {children}
           <div className="modal-action">
-            <Link href="/">
-              <label htmlFor="error-modal" className="btn btn-error">
-                Close
-              </label>
-            </Link>
+            <button onClick={onClose} className="btn btn-error text-white">
+              Close
+            </button>
           </div>
         </div>
       </dialog>
