@@ -5,7 +5,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import ErrorModal from "../Modals/ErrorModal/ErrorModal";
-import { login, signup } from "./login/authActions";
+import { googleSignin, login, signup } from "./login/authActions";
+
+import { useCreateUser } from "@/queries";
+import { Loading } from "../Loading";
 
 type AuthProps = {
   tab: "signin" | "signup";
@@ -16,9 +19,16 @@ type AuthFormInputs = {
   password: string;
 };
 
+type AuthError = {
+  type: "signup" | "signin";
+  message?: string;
+};
+
 export const Auth = ({ tab }: AuthProps) => {
-  const [error, setError] = useState<"signup" | "signin" | undefined>();
+  const [error, setError] = useState<AuthError>();
   const [loading, setLoading] = useState(false);
+
+  const { mutate: createUser } = useCreateUser();
 
   const {
     register,
@@ -29,18 +39,18 @@ export const Auth = ({ tab }: AuthProps) => {
   const handleSignin = async (data: AuthFormInputs) => {
     try {
       await login(data);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      setError("signin");
+      setError({ type: "signin", message: error?.message });
     }
   };
 
   const handleSignup = async (data: AuthFormInputs) => {
     try {
-      await signup(data);
-    } catch (error) {
-      console.log(error);
-      setError("signup");
+      const { user } = await signup(data);
+      createUser({ email: user?.email || "", supabaseId: user?.id || "" });
+    } catch (error: any) {
+      setError({ type: "signup", message: error?.message });
     }
   };
 
@@ -54,17 +64,21 @@ export const Auth = ({ tab }: AuthProps) => {
     setLoading(false);
   };
 
+  const handleGoogleSignin = async () => {
+    try {
+      await googleSignin();
+    } catch (error: any) {
+      setError({ type: "signup", message: error?.message });
+    }
+  };
+
   return (
-    <>
-      {loading && (
-        <div className="fixed inset-0 z-50 bg-black opacity-60 flex justify-center">
-          <span className="loading loading-spinner loading-xl text-white mb-[180px]"></span>
-        </div>
-      )}
-      {error === "signin" && (
+    <div className="w-full">
+      {loading && <Loading />}
+      {error?.type === "signin" && (
         <ErrorModal title="Login failed" onClose={() => setError(undefined)}>
           <p>
-            Invalid email or password.{" "}
+            {error?.message ?? `Invalid email or password.`}{" "}
             <Link
               className="text-blue-600 underline"
               href={"/auth/forgot-password"}
@@ -74,37 +88,35 @@ export const Auth = ({ tab }: AuthProps) => {
           </p>
         </ErrorModal>
       )}
-      {error === "signup" && (
+      {error?.type === "signup" && (
         <ErrorModal title="Signup failed" onClose={() => setError(undefined)}>
           <p>
-            {`We couldn't create your account. Please check your details and try
+            {error.message ??
+              `We couldn't create your account. Please check your details and try
             again.`}
           </p>
         </ErrorModal>
       )}
 
-      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="space-y-4 w-full" onSubmit={handleSubmit(onSubmit)}>
         <input
           type="email"
           placeholder="Email"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full mt-4 mb-0.5"
           {...register("email", { required: "Email is required" })}
         />
-        {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
-        )}
+        <p className="text-red-500">{errors?.email?.message || ""}</p>
 
         <input
           type="password"
           placeholder="Password"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full mt-4 mb-0.5"
           {...register("password", { required: "Password is required" })}
         />
-        {errors.password && (
-          <p className="text-red-500 text-sm">{errors.password.message}</p>
-        )}
 
-        <button type="submit" className="btn btn-primary w-full">
+        <p className="text-red-500 w-full">{errors?.password?.message}</p>
+
+        <button type="submit" className="btn btn-primary w-full my-2">
           {tab === "signup" ? "Sign up" : "Sign in"}
         </button>
       </form>
@@ -117,10 +129,13 @@ export const Auth = ({ tab }: AuthProps) => {
 
       <div className="divider">or</div>
 
-      <button className="btn btn-outline w-full flex items-center justify-center gap-2">
+      <button
+        onClick={handleGoogleSignin}
+        className="btn btn-outline w-full flex items-center justify-center gap-2"
+      >
         <Image src="/google.png" alt="Google logo" width={24} height={24} />
         Continue with Google
       </button>
-    </>
+    </div>
   );
 };

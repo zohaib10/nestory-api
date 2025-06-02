@@ -28,7 +28,12 @@ export default function Home() {
             and share your heritage with ease.
           </p>
           <div className="flex flex-col items-start mt-4 md:m-6">
-            <button className="btn btn-primary btn-md md:btn-lg w-auto mb-4 max-w-4xl">
+            <button
+              onClick={() => {
+                router.push("/auth");
+              }}
+              className="btn btn-primary btn-md md:btn-lg w-auto mb-4 max-w-4xl"
+            >
               Get Started
             </button>
             <button
@@ -46,8 +51,8 @@ export default function Home() {
           <Image
             src="/family_tree.png"
             alt="Landing page Tree"
-            width={500}
-            height={500}
+            width={400}
+            height={400}
             unoptimized
           />
         </div>

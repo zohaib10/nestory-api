@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function GatedFeaturesList() {
+  const router = useRouter();
   return (
     <div className="max-w-xl mx-auto">
       <h2 className="font-semibold mb-4">
@@ -37,7 +41,14 @@ export default function GatedFeaturesList() {
           </p>
         </div>
         <div className="flex justify-end w-full">
-          <button className="btn btn-primary">Sign up now</button>
+          <button
+            onClick={() => {
+              router.push("/auth");
+            }}
+            className="btn btn-primary"
+          >
+            Sign up now
+          </button>
         </div>
       </div>
     </div>

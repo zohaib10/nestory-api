@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 type AuthFormInputs = {
   email: string;
@@ -39,4 +40,21 @@ export async function signup({ email, password }: AuthFormInputs) {
     throw error;
   }
   return data;
+}
+
+export async function googleSignin() {
+  const supabase = await createClient();
+
+  console.log(`${process.env.NEXT_PUBLIC_REDIRECT_URL}/auth/callback`);
+
+  const { data } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_REDIRECT_URL}/auth/callback`,
+    },
+  });
+  console.log("data ", data);
+  if (data.url) {
+    redirect(data.url);
+  }
 }
